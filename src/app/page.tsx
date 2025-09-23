@@ -10,8 +10,11 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
 import { AppSidebarClient } from "./_AppSidebarClient";
-import { Separator } from "@/components/ui/separator";
+import { LogInIcon } from "lucide-react";
+import { SignedIn, SignedOut } from "@/services/clerk/components/SigninStatus";
+import { SidebarUserButton } from "@/features/users/components/SidebarUserButton";
 
 export default function HomePage() {
   return (
@@ -24,40 +27,32 @@ export default function HomePage() {
           </SidebarHeader>
           <SidebarContent>
             <SidebarGroup>
-              <Separator />
               <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>Settings</SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>Settings</SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>Settings</SidebarMenuButton>
-                </SidebarMenuItem>
-              </SidebarMenu>
-              <Separator />
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>Settings</SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>Settings</SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton>Settings</SidebarMenuButton>
-                </SidebarMenuItem>
+                <SignedOut>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link href={"/sign-in"}>
+                        <LogInIcon />
+                        <span>Log In</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SignedOut>
               </SidebarMenu>
             </SidebarGroup>
           </SidebarContent>
-          <SidebarFooter>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton>Settings</SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarFooter>
+          <SignedIn>
+            <SidebarFooter>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  {/* <SidebarMenuButton></SidebarMenuButton> */}
+                  <SidebarUserButton />
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarFooter>
+          </SignedIn>
         </Sidebar>
+        <div className="flex-1">asddadasdfgfhfgfsd</div>
       </AppSidebarClient>
     </SidebarProvider>
   );
