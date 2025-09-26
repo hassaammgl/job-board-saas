@@ -9,6 +9,7 @@ export const env = createEnv({
     DB_PORT: z.coerce.number().min(1).max(65535).default(5432),
     DB_NAME: z.string().min(1),
     CLERK_SECRET_KEY: z.string().min(1),
+    CLERK_WEBHOOK_SECRET: z.string().min(10),
   },
   createFinalSchema: (env) => {
     return z.object(env).transform((val) => {
